@@ -13,9 +13,9 @@ class FBGAT(nn.Module):
         super().__init__()
         self.fbgats = nn.ModuleList()
         # first layer
-        self.fbgats.append(fbgat(in_dim, hi_dim, heads = n_head, dropout = dropout, concat = True))
+        self.fbgats.append(fbgat(n_head, in_dim, hi_dim, dropout = dropout, concat = True))
         # last layer
-        self.fbgats.append(fbgat(hi_dim * n_head, out_dim, heads = 1, dropout = dropout, concat = False))
+        self.fbgats.append(fbgat(1, hi_dim * n_head, out_dim, dropout = dropout, concat = False))
         self.dropout = dropout
         self.reset_parameters()
 

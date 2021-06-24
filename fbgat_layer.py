@@ -6,7 +6,7 @@ class FBGAT_Layer(nn.Module):
     def __init__(self,n_head, in_dim, out_dim, dropout, concat):
         super().__init__()
       
-        self.high = nn.Linear(in_dim, out_dim, bias = False)
+        self.high = nn.Linear(in_dim, out_dim * n_head, bias = False)
         self.gat = GATConv(in_dim, out_dim, heads = n_head, dropout = dropout, concat = concat)
         self.dropout = dropout
 
