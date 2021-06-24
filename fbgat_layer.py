@@ -1,5 +1,5 @@
 from torch import mm, nn, rand
-from torch_geometric.nn.conv.gcn_conv import GATConv
+from torch_geometric.nn import GATConv
 import torch.nn.functional as F
 
 class FBGAT_Layer(nn.Module):

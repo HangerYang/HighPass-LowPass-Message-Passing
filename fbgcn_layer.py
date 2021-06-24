@@ -1,5 +1,5 @@
 from torch import mm, nn, rand
-from torch_geometric.nn.conv.gcn_conv import GCNConv
+from torch_geometric.nn import GCNConv
 import torch.nn.functional as F
 
 class FBGCN_Layer(nn.Module):
