@@ -16,12 +16,12 @@ class FBGCN(nn.Module):
         self.num_layers = n_layer
         self.fbgcns = nn.ModuleList()
         # first layer
-        self.fbgcns.append(fbgcn(in_dim, hi_dim, dropout))
+        self.fbgcns.append(fbgcn(in_dim, hi_dim))
         # inner layers
         for _ in range(n_layer - 2):
-            self.fbgcns.append(fbgcn(hi_dim, hi_dim, dropout))
+            self.fbgcns.append(fbgcn(hi_dim, hi_dim))
         # last layer
-        self.fbgcns.append(fbgcn(hi_dim, out_dim, dropout))
+        self.fbgcns.append(fbgcn(hi_dim, out_dim))
         self.dropout = dropout
         self.reset_parameters()
 
@@ -30,13 +30,13 @@ class FBGCN(nn.Module):
             fbgcn.reset_parameters()
     def forward(self, x, edge_index, lap, d_inv):
         # first layer
-        x = self.fbgcns[0](x, edge_index, lap, d_inv)
+        x = F.relu(self.fbgcns[0](x, edge_index, lap, d_inv))
         x = F.dropout(x, p=self.dropout, training=self.training)
         # inner layers
         if self.num_layers > 2:
             for layer in range(self.num_layers - 1):
-                 x = self.fbgcns[0](x, edge_index, lap, d_inv)
+                 x = F.relu(self.fbgcns[0](x, edge_index, lap, d_inv))
                  x = F.dropout(x, p=self.dropout, training=self.training)
         # last layer
-        return self.fbgcns[-1](x, edge_index, lap, d_inv)
+        return F.log_softmax(self.fbgcns[-1](x, edge_index, lap, d_inv))
 
