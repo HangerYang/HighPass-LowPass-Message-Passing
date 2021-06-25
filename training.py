@@ -7,7 +7,7 @@ from tqdm import tqdm
 import torch.nn.functional as F
 
 from torch_geometric.datasets import Planetoid
-name_data = 'Cora'
+name_data = 'PubMed'
 dataset = Planetoid(root= '/tmp/' + name_data, name = name_data)
 device = torch.device("cuda" if torch.cuda.is_available else "cpu")
 

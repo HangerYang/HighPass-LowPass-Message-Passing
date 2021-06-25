@@ -1,10 +1,10 @@
-from torch import zeros, from_numpy, tensor
+from torch import zeros, from_numpy, tensor, eye
 from tqdm import tqdm
 import numpy as np
 import scipy
 
 def lap_dinv(edge_index, num_nodes):
-    adj = zeros((num_nodes,num_nodes))
+    adj = eye((num_nodes))
     degree = zeros((num_nodes,num_nodes))
     for i in tqdm(range(edge_index.shape[1])):
         first = edge_index[0][i]

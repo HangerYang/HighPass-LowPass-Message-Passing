@@ -24,7 +24,6 @@ class FBGAT_Layer(nn.Module):
         Lhp = mm(mm(d_inv, lap), d_inv)
         Hh = mm(Lhp, F.relu(self.high(x)))
         
-        Hl = F.elu(self.gat(x, edge_index))
-        Hl = F.dropout(Hl, training=self.training)
+        Hl = F.self.gat(x, edge_index)
 
         return (self.aL * Hl + self.aH * Hh)
